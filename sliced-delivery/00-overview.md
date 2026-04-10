@@ -72,3 +72,4 @@ The design explicitly documents three reasons that make Fact-Find the ideal firs
 | `phase-4-customer-portal.md` | Phase 4 detail — Customer Portal |
 | `phase-5-commissions-dashboards.md` | Phase 5 detail — Commissions & Dashboards |
 | `phase-6-uat-golive.md` | Phase 6 detail — UAT & Go Live |
+| `09-end-to-end-process.md` | End-to-end process through the phased delivery lens — how the process evolves as each phase goes live |
