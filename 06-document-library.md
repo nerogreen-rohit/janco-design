@@ -1,4 +1,4 @@
-<a>← Back to Index</a>
+[← Back to Index](00-index.md)
 
 # 6. Document Library Structure
 

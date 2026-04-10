@@ -1,4 +1,4 @@
-<a>← Back to Index</a>
+[← Back to Index](00-index.md)
 
 # 17. Key Design Decisions
 

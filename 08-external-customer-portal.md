@@ -1,4 +1,4 @@
-<a>← Back to Index</a>
+[← Back to Index](00-index.md)
 
 # 8. External Customer Portal
 

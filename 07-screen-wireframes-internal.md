@@ -1,4 +1,4 @@
-<a>← Back to Index</a>
+[← Back to Index](00-index.md)
 
 # 7. Screen Wireframes — Internal Staff App
 
@@ -10,37 +10,37 @@ All wireframes use ASCII art to represent screen layouts. The internal staff app
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
-║  🏦  SPECIALIST LENDING HUB          [Staff Member Name]  [Logout]  ║
+║  🏦  SPECIALIST LENDING HUB          [Staff Member Name]  [Logout]   ║
 ╠══════════════════════════════════════════════════════════════════════╣
-║  [Dashboard]  [Leads]  [Cases]  [Commissions]  [Lenders]  [Admin]  ║
+║  [Dashboard]  [Leads]  [Cases]  [Commissions]  [Lenders]  [Admin]    ║
 ╠══════════════════════════════════════════════════════════════════════╣
 ║                                                                      ║
-║  PIPELINE SUMMARY                          TODAY'S TASKS            ║
-║  ┌─────────────┬──────────┬────────────┐   ┌──────────────────────┐ ║
-║  │  Active     │ 12 Cases │  £4.2m     │   │ ⚠ Chase valuation   │ ║
-║  │  Cases      │          │  Pipeline  │   │   BTL-2026-0004      │ ║
-║  ├─────────────┼──────────┼────────────┤   │ ⚠ Send DIP docs     │ ║
-║  │  New Leads  │  3 Today │  8 Week    │   │   BRIDGE-2026-0002   │ ║
-║  ├─────────────┼──────────┼────────────┤   │ ✅ TOB signed        │ ║
-║  │  Completions│  2 Month │  £18,400   │   │   BTL-2026-0007      │ ║
-║  │             │          │  Fees      │   └──────────────────────┘ ║
-║  └─────────────┴──────────┴────────────┘                            ║
+║  PIPELINE SUMMARY                          TODAY'S TASKS             ║
+║  ┌─────────────┬──────────┬────────────┐   ┌──────────────────────┐  ║
+║  │  Active     │ 12 Cases │  £4.2m     │   │ ⚠ Chase valuation    │  ║
+║  │  Cases      │          │  Pipeline  │   │   BTL-2026-0004      │  ║
+║  ├─────────────┼──────────┼────────────┤   │ ⚠ Send DIP docs      │  ║
+║  │  New Leads  │  3 Today │  8 Week    │   │   BRIDGE-2026-0002   │  ║
+║  ├─────────────┼──────────┼────────────┤   │ ✅ TOB signed        │  ║
+║  │  Completions│  2 Month │  £18,400   │   │   BTL-2026-0007      │  ║
+║  │             │          │  Fees      │   └──────────────────────┘  ║
+║  └─────────────┴──────────┴────────────┘                             ║
 ║                                                                      ║
-║  CASES BY STAGE                          CASES BY PRODUCT           ║
-║  ┌────────────────────────────────────┐  ┌────────────────────────┐ ║
-║  │  Fact-Find          ████░░░░  4    │  │  BTL         ██████  6 │ ║
-║  │  Full Application   ███░░░░░  3    │  │  Bridging    ████    4 │ ║
-║  │  Underwriting       ██░░░░░░  2    │  │  Commercial  ██      2 │ ║
-║  │  Legals             █░░░░░░░  1    │  │  Dev Finance █       1 │ ║
-║  │  Other              ██░░░░░░  2    │  │  Other       ░       0 │ ║
-║  └────────────────────────────────────┘  └────────────────────────┘ ║
+║  CASES BY STAGE                          CASES BY PRODUCT            ║
+║  ┌────────────────────────────────────┐  ┌────────────────────────┐  ║
+║  │  Fact-Find          ████░░░░  4    │  │  BTL         ██████  6 │  ║
+║  │  Full Application   ███░░░░░  3    │  │  Bridging    ████    4 │  ║
+║  │  Underwriting       ██░░░░░░  2    │  │  Commercial  ██      2 │  ║
+║  │  Legals             █░░░░░░░  1    │  │  Dev Finance █       1 │  ║
+║  │  Other              ██░░░░░░  2    │  │  Other       ░       0 │  ║
+║  └────────────────────────────────────┘  └────────────────────────┘  ║
 ║                                                                      ║
 ║  SLA ALERTS                                                          ║
-║  ┌──────────────────────────────────────────────────────────────┐   ║
-║  │  🔴 BTL-2026-0003 — Underwriting — 5 days overdue            │   ║
-║  │  🟡 BRIDGE-2026-0001 — Valuation — due tomorrow              │   ║
-║  │  🟢 BTL-2026-0008 — Fact-Find — on track                     │   ║
-║  └──────────────────────────────────────────────────────────────┘   ║
+║  ┌──────────────────────────────────────────────────────────────┐    ║
+║  │  🔴 BTL-2026-0003 — Underwriting — 5 days overdue            │    ║
+║  │  🟡 BRIDGE-2026-0001 — Valuation — due tomorrow              │    ║
+║  │  🟢 BTL-2026-0008 — Fact-Find — on track                     │    ║
+║  └──────────────────────────────────────────────────────────────┘    ║ 
 ╚══════════════════════════════════════════════════════════════════════╝
 ```
 
@@ -50,22 +50,22 @@ All wireframes use ASCII art to represent screen layouts. The internal staff app
 
 ```
 ╔══════════════════════════════════════════════════════════════════════╗
-║  🏦  SPECIALIST LENDING HUB          [Staff Member Name]  [Logout]  ║
+║  🏦  SPECIALIST LENDING HUB          [Staff Member Name]  [Logout]   ║
 ╠══════════════════════════════════════════════════════════════════════╣
-║  [Dashboard]  [Leads]  [Cases]  [Commissions]  [Lenders]  [Admin]  ║
+║  [Dashboard]  [Leads]  [Cases]  [Commissions]  [Lenders]  [Admin]    ║
 ╠══════════════════════════════════════════════════════════════════════╣
-║  LEADS                                              [+ New Lead]    ║
+║  LEADS                                              [+ New Lead]     ║
 ║                                                                      ║
-║  Filter: [All Status ▼]  [All Products ▼]  [All Assigned ▼]  [🔍]  ║
+║  Filter: [All Status ▼]  [All Products ▼]  [All Assigned ▼]  [🔍]    ║
 ║                                                                      ║
-║  ┌────────────┬──────────────┬──────────┬──────────┬────────────┐   ║
-║  │  Lead ID   │  Name        │ Product  │ Status   │ Assigned   │   ║
-║  ├────────────┼──────────────┼──────────┼──────────┼────────────┤   ║
-║  │ LEAD-0021  │ James Hart   │ BTL      │ New      │ Sarah      │   ║
-║  │ LEAD-0022  │ Maria Chen   │ Bridging │ Contacted│ Tom        │   ║
-║  │ LEAD-0023  │ Paul Singh   │ Dev      │ Qualified│ Sarah      │   ║
-║  │ LEAD-0024  │ Emma Scott   │ BTL      │ New      │ Unassigned │   ║
-║  └────────────┴──────────────┴──────────┴──────────┴────────────┘   ║
+║  ┌────────────┬──────────────┬──────────┬──────────┬────────────┐    ║
+║  │  Lead ID   │  Name        │ Product  │ Status   │ Assigned   │    ║
+║  ├────────────┼──────────────┼──────────┼──────────┼────────────┤    ║
+║  │ LEAD-0021  │ James Hart   │ BTL      │ New      │ Sarah      │    ║
+║  │ LEAD-0022  │ Maria Chen   │ Bridging │ Contacted│ Tom        │    ║
+║  │ LEAD-0023  │ Paul Singh   │ Dev      │ Qualified│ Sarah      │    ║
+║  │ LEAD-0024  │ Emma Scott   │ BTL      │ New      │ Unassigned │    ║
+║  └────────────┴──────────────┴──────────┴──────────┴────────────┘    ║
 ║                                                                      ║
 ║  [Select lead to view details or convert to case]                    ║
 ╚══════════════════════════════════════════════════════════════════════╝
