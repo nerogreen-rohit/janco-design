@@ -1,0 +1,12 @@
+ColumnName,Type,Required,ChoiceValues,Notes
+Title,Single line of text,Yes,,Referrer / introducer name
+CompanyName,Single line of text,No,,
+ContactName,Single line of text,Yes,,
+Email,Single line of text,No,,
+Phone,Single line of text,No,,
+ReferrerType,Choice,No,"Introducer|Referral Partner|Network|Other",
+DefaultSplitPercentage,Number,No,,Default referral fee split %
+IsActive,Yes/No,Yes,,Default: Yes
+Notes,Multiple lines of text,No,,
+TotalCasesReferred,Number,No,,Updated by flow
+TotalFeesEarned,Currency,No,,Running total - updated by flow
