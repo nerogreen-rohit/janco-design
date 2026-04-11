@@ -1,0 +1,151 @@
+# Task P3-09: Flow 7 — Send Document Request Email
+
+**Phase:** 3 — Case Management & Lifecycle  
+**Story:** As a system, when a document request is created I need to email the customer with the document name and upload link so that they know what to submit  
+**Priority:** 🔴 Critical  
+**Estimated effort:** 1–2 hours  
+**Depends on:** Cases list (P1-01), Document Requests list (P3-03), Document Types list (P3-02), Document library with shared folders (P1-05)
+
+---
+
+## Step-by-Step Guide
+
+### Step 1 — Create the Flow
+
+1. Go to **Power Automate** → **+ Create** → **Automated cloud flow**
+2. Name: `Flow 7 — Send Document Request Email`
+3. Trigger: **When an item is created** (SharePoint)
+4. Site Address: `https://[tenant].sharepoint.com/sites/lending`
+5. List Name: `Document Requests`
+
+### Step 2 — Get Related Data
+
+1. Add **Get item** (SharePoint) — Get the Case record:
+   - List: `Specialist Lending Cases`
+   - Filter Query: `CaseID eq '@{triggerOutputs()?['body/CaseID']}'`
+
+2. Add **Get item** (SharePoint) — Get the Document Type:
+   - List: `Document Types`
+   - Id: `triggerOutputs()?['body/DocTypeID']`
+
+### Step 3 — Build the Upload Folder Link
+
+Construct the link to the customer's upload folder (folders 01–04 from Phase 1):
+
+```
+// Map document category to folder
+// Identity/Income docs → 01-identification
+// Property docs → 02-property
+// Legal/Lender docs → 03-legal-and-lender
+// Other docs → 04-other
+
+concat(
+    'https://[tenant].sharepoint.com/sites/lending/CaseDocuments/',
+    triggerOutputs()?['body/CaseID'],
+    '/',
+    if(
+        equals(triggerOutputs()?['body/DocTypeCategory'], 'Identity'),
+        '01-identification',
+        if(
+            equals(triggerOutputs()?['body/DocTypeCategory'], 'Income'),
+            '01-identification',
+            if(
+                equals(triggerOutputs()?['body/DocTypeCategory'], 'Property'),
+                '02-property',
+                if(
+                    or(
+                        equals(triggerOutputs()?['body/DocTypeCategory'], 'Legal'),
+                        equals(triggerOutputs()?['body/DocTypeCategory'], 'Lender')
+                    ),
+                    '03-legal-and-lender',
+                    '04-other'
+                )
+            )
+        )
+    )
+)
+```
+
+### Step 4 — Send the Email
+
+1. Add **Send an email (V2)** (Office 365 Outlook):
+
+   - **To:** Customer email from the Case record: `outputs('Get_Case')?['body/Applicant1Email']`
+   - **Subject:** `Document Required: @{outputs('Get_DocType')?['body/Title']} — Case @{triggerOutputs()?['body/CaseID']}`
+   - **Body (HTML):**
+
+```html
+<div style="font-family: Arial, sans-serif; max-width: 600px;">
+    <h2 style="color: #2c3e50;">Document Request</h2>
+    <p>Dear @{outputs('Get_Case')?['body/Applicant1FirstName']},</p>
+    <p>We need the following document for your lending application
+       <strong>@{triggerOutputs()?['body/CaseID']}</strong>:</p>
+
+    <table style="border-collapse: collapse; width: 100%; margin: 20px 0;">
+        <tr style="background: #f8f9fa;">
+            <td style="padding: 12px; border: 1px solid #dee2e6;"><strong>Document</strong></td>
+            <td style="padding: 12px; border: 1px solid #dee2e6;">
+                @{outputs('Get_DocType')?['body/Title']}
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 12px; border: 1px solid #dee2e6;"><strong>Description</strong></td>
+            <td style="padding: 12px; border: 1px solid #dee2e6;">
+                @{outputs('Get_DocType')?['body/Description']}
+            </td>
+        </tr>
+        <tr style="background: #f8f9fa;">
+            <td style="padding: 12px; border: 1px solid #dee2e6;"><strong>Due Date</strong></td>
+            <td style="padding: 12px; border: 1px solid #dee2e6;">
+                @{formatDateTime(triggerOutputs()?['body/DueDate'], 'dd MMMM yyyy')}
+            </td>
+        </tr>
+    </table>
+
+    <p>Please upload your document using the link below:</p>
+    <p style="text-align: center; margin: 20px 0;">
+        <a href="@{outputs('UploadFolderLink')}"
+           style="background: #0078d4; color: white; padding: 12px 24px;
+                  text-decoration: none; border-radius: 4px;">
+            Upload Document →
+        </a>
+    </p>
+
+    <p style="color: #666; font-size: 12px;">
+        If you have any questions, please reply to this email or contact your advisor.
+    </p>
+</div>
+```
+
+### Step 5 — Error Handling
+
+1. Wrap Steps 2–4 in a **Scope**
+2. Add a parallel failure branch:
+   - Send Teams notification to case owner:
+     ```
+     ⚠️ Flow 7 Failed — Document Request Email
+     Case: @{triggerOutputs()?['body/CaseID']}
+     Document: @{triggerOutputs()?['body/DocTypeName']}
+     ```
+
+### Step 6 — Test
+
+1. Create a new Document Request item for a test case (e.g. DocType = "Passport")
+2. Wait 30–60 seconds
+3. Verify:
+   - [ ] Customer receives email with correct document name
+   - [ ] Document description is included
+   - [ ] Due date is formatted correctly
+   - [ ] Upload folder link points to the correct category folder
+   - [ ] Email renders correctly in Outlook and mobile
+
+---
+
+## Troubleshooting
+
+| Issue | Resolution |
+|---|---|
+| Email not sent | Check flow run history; verify customer email address is populated on the Case |
+| Wrong upload folder link | Verify the category-to-folder mapping logic in Step 3 |
+| Document description blank | Ensure the Document Types list has Description populated for the requested type |
+| Due date shows wrong format | Adjust the `formatDateTime` expression format string |

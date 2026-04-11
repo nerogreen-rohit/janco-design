@@ -1,0 +1,13 @@
+ColumnName,Type,Required,Notes
+Title,Single line of text,Yes,Task description
+CaseID,Single line of text,No,FK to Cases list (optional — some tasks may be general)
+CaseName,Single line of text,No,Denormalized
+AssignedTo,Person or Group,Yes,Staff member responsible
+CreatedBy,Person or Group,Yes,Staff member who created the task
+DueDate,Date and Time,Yes,Date only
+Priority,Choice,Yes,"High|Medium|Low (Default: Medium)"
+Status,Choice,Yes,"Not Started|In Progress|Completed|Cancelled (Default: Not Started)"
+Category,Choice,No,"Chase Customer|Chase Lender|Chase Solicitor|Internal|Admin|Other"
+Notes,Multiple lines of text,No,Additional task details
+CompletedDate,Date and Time,No,Date only — set when Status = Completed
+IsOverdue,Yes/No,No,Set by SLA Reminder flow (Default: No)
