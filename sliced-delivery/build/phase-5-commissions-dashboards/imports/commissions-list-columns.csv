@@ -1,0 +1,17 @@
+ColumnName,Type,Required,Section,Notes
+Title,Single line of text,No,Identity,"Auto-set to {CaseID}-{CommissionType} by flow"
+CaseID,Single line of text,Yes,Identity,FK to Cases list
+CaseName,Single line of text,No,Identity,Denormalized from Case record
+LenderName,Single line of text,No,Identity,Denormalized from Case or Lenders list
+ProductType,Single line of text,No,Identity,Denormalized from Case record
+CommissionType,Choice,Yes,Commission,"Proc Fee|Advisory Fee (AdvFee)|Introducer Fee|Referral Fee"
+ExpectedAmount,Currency,No,Commission,Expected commission value
+ActualAmount,Currency,No,Commission,Actual amount received
+IsReceived,Yes/No,No,Commission,Default: No
+ReceivedDate,Date and Time,No,Commission,Date only — when payment was received
+InvoiceNumber,Single line of text,No,Commission,Reference for invoice tracking
+PaymentMethod,Choice,No,Commission,"BACS|Cheque|Deducted at Completion|Other"
+SplitPercentage,Number,No,Referral,If shared — percentage to this party (0-100)
+ReferrerID,Lookup,No,Referral,"Lookup list: Referrers, Lookup column: Title"
+Notes,Multiple lines of text,No,Additional,Plain text
+TaxYear,Single line of text,No,Additional,"e.g. 2025/26 — for Commission Dashboard filtering"
