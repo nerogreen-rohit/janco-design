@@ -1,10 +1,10 @@
 # Task P5-04: Flow 11 — Calculate Proc Fee
 
 **Phase:** 5 — Commissions & Dashboards  
-**Story:** As a system, when a Lender is assigned to a case I need to auto-calculate the expected proc fee from `LoanAmountRequired × LenderProcFeePercent` so that proc fee estimates are always current  
+**Story:** As a system, when a Lender is assigned to a case I need to auto-calculate the expected proc fee from `LoanAmountRequired × TypicalProcFeePercent` so that proc fee estimates are always current  
 **Priority:** 🔴 Critical  
 **Estimated effort:** 2–3 hours  
-**Depends on:** Commissions list (P5-01), Cases list commission columns (P5-02), Lenders list (P3-03)
+**Depends on:** Commissions list (P5-01), Cases list commission columns (P5-02), Lenders list (P3-06)
 
 ---
 
@@ -48,7 +48,7 @@ Only fire when LenderID has a value:
 
 2. Add **Set variable**:
    - Name: `varProcFeePercent`
-   - Value: `outputs('Get_item_-_Lender')?['body/ProcFeePercent']`
+   - Value: `outputs('Get_item_-_Lender')?['body/TypicalProcFeePercent']`
 
 ### Step 5 — Calculate Expected Proc Fee
 
@@ -56,7 +56,7 @@ Only fire when LenderID has a value:
    - Name: `varProcFeeExpected`
    - Value: `mul(variables('varLoanAmount'), div(variables('varProcFeePercent'), 100))`
 
-> **Formula:** `ProcFeeExpected = LoanAmountRequired × (LenderProcFeePercent / 100)`  
+> **Formula:** `ProcFeeExpected = LoanAmountRequired × (TypicalProcFeePercent / 100)`  
 > Example: £285,000 × 0.75% = £2,137.50
 
 ### Step 6 — Check for Existing Proc Fee Commission Record
@@ -120,18 +120,18 @@ Sum all Commission records for this CaseID:
 1. Wrap Steps 4–9 in a **Scope**
 2. Add a parallel failure branch (**Configure run after** → "has failed"):
    - Send Teams notification to admin:
-     - Message: `❌ Flow 11 — Proc Fee calculation failed for case {varCaseID}. Please investigate.`
+     - Message: `❌ Flow 11 — Proc Fee calculation failed for case @{variables('varCaseID')}. Please investigate.`
 
 ### Step 11 — Test
 
-1. Open an existing Case record and set `LenderID` to a lender with `ProcFeePercent = 0.75`
+1. Open an existing Case record and set `LenderID` to a lender with `TypicalProcFeePercent = 0.75`
 2. Set `LoanAmountRequired = 285000`
 3. Wait up to 30 seconds
 4. Verify:
    - [ ] A new Commission record exists with CommissionType = "Proc Fee" and ExpectedAmount = £2,137.50
    - [ ] Case record `ProcFeeExpected` = £2,137.50
    - [ ] Case record `TotalCommissionExpected` updated correctly
-5. Change the Lender to a different lender (ProcFeePercent = 1.0)
+5. Change the Lender to a different lender (TypicalProcFeePercent = 1.0)
 6. Verify:
    - [ ] The existing Proc Fee Commission record is updated (not duplicated)
    - [ ] ExpectedAmount = £2,850.00
@@ -144,7 +144,7 @@ Sum all Commission records for this CaseID:
 | Issue | Resolution |
 |---|---|
 | Flow doesn't trigger when LenderID changes | Ensure trigger condition checks for non-empty LenderID; verify the column internal name matches |
-| Proc fee calculated as 0 | Check that LenderProcFeePercent is stored as a number (e.g. 0.75) not a string; verify the formula divides by 100 only if stored as a percentage |
+| Proc fee calculated as 0 | Check that TypicalProcFeePercent is stored as a number (e.g. 0.75) not a string; verify the formula divides by 100 only if stored as a percentage |
 | Duplicate Proc Fee records created | Verify the filter query in Step 6 matches on both CaseID and CommissionType = "Proc Fee" |
 | LenderName not populating | Ensure the Get item action on Lenders list returns the Title field |
 | Flow runs in a loop | Add a condition to skip if ProcFeeExpected hasn't changed — compare old vs new values |

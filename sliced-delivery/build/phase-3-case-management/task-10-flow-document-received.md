@@ -21,29 +21,32 @@
 
 ### Step 2 — Extract Case ID and Folder Category from File Path
 
-Parse the file path to identify the case and document category:
+Parse the file path to identify the case and document category.
+
+> **Important:** The library name is `Case Documents` (with space). SharePoint encodes this as `Case%20Documents` in URLs but uses `Case Documents` in server-relative paths. Folder names from Phase 1 Flow 5 are: `01-Identity`, `02-Income`, `03-Property`, `04-Bank-Statements`.
 
 ```
-// File path format: /CaseDocuments/{CaseID}/{FolderName}/{FileName}
-// Example: /CaseDocuments/BTL-2026-0001/01-identification/passport-scan.pdf
+// File path format: /sites/lending/Case Documents/{CaseID}/{FolderName}/{FileName}
+// Example: /sites/lending/Case Documents/BTL-2026-0001/01-Identity/passport-scan.pdf
 
-// Extract CaseID from path
-// Split the path by '/' and take the segment after CaseDocuments
+// Extract CaseID and FolderName from the path
 ```
 
 1. Add **Compose** — `FilePath`: `triggerOutputs()?['body/{Path}']`
 2. Add **Compose** — `PathSegments`: `split(outputs('FilePath'), '/')`
-3. Add **Compose** — `CaseID`: `outputs('PathSegments')[2]` (adjust index based on actual path structure)
-4. Add **Compose** — `FolderName`: `outputs('PathSegments')[3]`
+3. Add **Compose** — `CaseID`: `outputs('PathSegments')[4]` ← adjust index: segments are `['', 'sites', 'lending', 'Case Documents', '{CaseID}', '{FolderName}', '{FileName}']`
+4. Add **Compose** — `FolderName`: `outputs('PathSegments')[5]`
+
+> **Tip:** The exact path segment index depends on how your trigger returns the path. Test with a sample file upload and inspect `triggerOutputs()?['body/{Path}']` in the flow run history to confirm the correct indices before going live.
 
 ### Step 3 — Map Folder to Document Category
 
 | Folder Name | Document Category |
 |---|---|
-| `01-identification` | Identity, Income |
-| `02-property` | Property |
-| `03-legal-and-lender` | Legal, Lender |
-| `04-other` | Other |
+| `01-Identity` | Identity |
+| `02-Income` | Income |
+| `03-Property` | Property |
+| `04-Bank-Statements` | Bank Statements, Other |
 
 > **Note:** Folders 05–13 are internal staff folders — uploads to these do not trigger document request matching.
 
@@ -61,19 +64,17 @@ Add a **Condition**: Check if FolderName starts with "01", "02", "03", or "04"
 2. Add **Filter array** to match by category:
 
 ```
-@and(
-    or(
-        and(equals(outputs('FolderName'), '01-identification'),
-            or(equals(item()?['DocTypeCategory'], 'Identity'),
-               equals(item()?['DocTypeCategory'], 'Income'))),
-        and(equals(outputs('FolderName'), '02-property'),
-            equals(item()?['DocTypeCategory'], 'Property')),
-        and(equals(outputs('FolderName'), '03-legal-and-lender'),
-            or(equals(item()?['DocTypeCategory'], 'Legal'),
-               equals(item()?['DocTypeCategory'], 'Lender'))),
-        and(equals(outputs('FolderName'), '04-other'),
-            equals(item()?['DocTypeCategory'], 'Other'))
-    )
+@or(
+    and(equals(outputs('FolderName'), '01-Identity'),
+        equals(item()?['DocTypeCategory'], 'Identity')),
+    and(equals(outputs('FolderName'), '02-Income'),
+        equals(item()?['DocTypeCategory'], 'Income')),
+    and(equals(outputs('FolderName'), '03-Property'),
+        equals(item()?['DocTypeCategory'], 'Property')),
+    and(equals(outputs('FolderName'), '04-Bank-Statements'),
+        or(equals(item()?['DocTypeCategory'], 'Other'),
+           equals(item()?['DocTypeCategory'], 'Lender'),
+           equals(item()?['DocTypeCategory'], 'Legal')))
 )
 ```
 
@@ -91,9 +92,12 @@ If matching requests are found, update the first match:
 
 ### Step 6 — Get the Case Owner
 
-1. Add **Get item** (SharePoint):
+1. Add **Get items** (SharePoint):
    - List: `Specialist Lending Cases`
    - Filter Query: `CaseID eq '@{outputs('CaseID')}'`
+   - Top Count: `1`
+
+   > **Note:** Use **Get items** (plural) with Top Count = 1, not **Get item** (singular). The "Get item" action requires a list item ID and does not support OData filter queries. Reference the result as `first(outputs('Get_items_-_Case')?['body/value'])`.
 
 ### Step 7 — Notify Case Owner via Teams
 
@@ -124,7 +128,7 @@ If matching requests are found, update the first match:
 ### Step 9 — Test
 
 1. Create a Document Request for a test case (e.g. CaseID = BTL-2026-0001, DocType = Passport)
-2. Upload a file named `passport-scan.pdf` to the case's `01-identification` folder
+2. Upload a file named `passport-scan.pdf` to the case's `01-Identity` folder
 3. Wait 30–60 seconds
 4. Verify:
    - [ ] Document Request status changes from "Requested" to "Received"

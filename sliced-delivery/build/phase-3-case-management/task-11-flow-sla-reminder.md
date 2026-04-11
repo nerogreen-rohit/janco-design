@@ -16,7 +16,9 @@
 2. Name: `Flow 9 — SLA Reminder`
 3. Repeat every: **1 Day**
 4. Start time: Set to **08:00 AM** (local time)
-5. Time zone: `(UTC+00:00) London`
+5. Time zone: `GMT Standard Time`
+
+   > **Important:** Use `GMT Standard Time` (the Windows time zone ID for UK time), **not** `(UTC+00:00) London`. The `GMT Standard Time` zone is DST-aware and automatically adjusts for British Summer Time (BST), ensuring the flow always runs at 08:00 local UK time year-round. Using a raw UTC offset would cause the flow to run at 09:00 during BST.
 
 ### Step 2 — Get All Active Cases
 

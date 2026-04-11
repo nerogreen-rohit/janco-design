@@ -41,11 +41,16 @@ If using the Stage History trigger approach:
    - Filter Query: `CaseID eq '@{triggerOutputs()?['body/CaseID']}'`
    - Top Count: 1
 
-2. Add **Get item** (SharePoint) — Get the Stage Config:
+2. Add **Get items** (SharePoint) — Get the Stage Config:
    - List: `Stage Configuration`
    - Filter Query: `Title eq '@{triggerOutputs()?['body/StageName']}'`
+   - Top Count: 1
 
-3. Add a **Condition**: `outputs('Get_Stage_Config')?['body/VisibleToCustomer']` equals `true`
+   > **Note:** Use **Get items** (plural) with Top Count = 1, not **Get item** (singular). The "Get item" action requires a list item ID and does not support OData filter queries. Reference the result as `first(outputs('Get_items_-_StageConfig')?['body/value'])`.
+   >
+   > **Alternative (preferred):** If Flow 6 calls Flow 13 as a child flow, pass the Stage Configuration item ID directly so you can use **Get item** by ID instead of filtering by Title.
+
+3. Add a **Condition**: `first(outputs('Get_items_-_StageConfig')?['body/value'])?['VisibleToCustomer']` equals `true`
    - If **No** → **Terminate** (stage not visible to customer)
 
 ### Step 3 — Send Customer Email

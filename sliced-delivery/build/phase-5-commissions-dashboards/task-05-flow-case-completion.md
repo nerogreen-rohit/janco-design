@@ -4,7 +4,7 @@
 **Story:** As a system, when a case status changes to "Completed" I need to send a completion email, close outstanding document requests, and remind the case owner to review commissions  
 **Priority:** 🔴 Critical  
 **Estimated effort:** 2–3 hours  
-**Depends on:** Cases list (P1-01), Document Requests list (P3-01), Commissions list (P5-01)
+**Depends on:** Cases list (P1-01), Document Requests list (P3-03), Commissions list (P5-01)
 
 ---
 
@@ -113,7 +113,7 @@ Open the Case Workspace → Commission tab to review.
 1. Wrap Steps 4–7 in a **Scope**
 2. Add a parallel failure branch (**Configure run after** → "has failed"):
    - Send Teams notification to admin:
-     - Message: `❌ Flow 16 — Case Completion Wrap-Up failed for case {varCaseID}. Actions may be incomplete. Please check.`
+     - Message: `❌ Flow 16 — Case Completion Wrap-Up failed for case @{variables('varCaseID')}. Actions may be incomplete. Please check.`
 
 ### Step 9 — Test
 

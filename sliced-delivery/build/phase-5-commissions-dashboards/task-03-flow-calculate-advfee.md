@@ -48,7 +48,7 @@ Add a trigger condition to limit the flow to Advisory Fee records only:
 
 2. **If No** (amount is 0 or blank):
    - Add **Send an HTTP request to SharePoint** or **Send a message** (Teams) to the case owner:
-     - Message: `⚠️ Advisory Fee (AdvFee) for case {varCaseID} has no expected amount. Please update.`
+     - Message: `⚠️ Advisory Fee (AdvFee) for case @{variables('varCaseID')} has no expected amount. Please update.`
    - Terminate the flow (optional — or continue to still update total)
 
 3. **If Yes**: Continue to Step 5
@@ -89,7 +89,7 @@ Sum all Commission records for this CaseID to calculate the total:
 
 2. **If Yes** (not yet received):
    - (Optional) Send a Teams notification to the case owner:
-     - Message: `💰 Advisory Fee (AdvFee) of £{varExpectedAmount} recorded for case {varCaseID}. Status: Pending receipt.`
+     - Message: `💰 Advisory Fee (AdvFee) of £@{variables('varExpectedAmount')} recorded for case @{variables('varCaseID')}. Status: Pending receipt.`
 
 ### Step 8 — Error Handling
 

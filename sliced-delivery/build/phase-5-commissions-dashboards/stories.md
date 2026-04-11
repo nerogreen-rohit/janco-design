@@ -21,7 +21,7 @@
 | Story ID | User Story | Task Guide | Priority |
 |---|---|---|---|
 | P5-03 | As a **system**, when a Commission record of type "Advisory Fee (AdvFee)" is created or modified I need to validate the amount and update the case total so that advisory fees are tracked accurately | [task-03-flow-calculate-advfee.md](task-03-flow-calculate-advfee.md) | 🔴 Critical |
-| P5-04 | As a **system**, when a Lender is assigned to a case I need to auto-calculate the expected proc fee from `LoanAmountRequired × LenderProcFeePercent` so that proc fee estimates are always current | [task-04-flow-calculate-proc-fee.md](task-04-flow-calculate-proc-fee.md) | 🔴 Critical |
+| P5-04 | As a **system**, when a Lender is assigned to a case I need to auto-calculate the expected proc fee from `LoanAmountRequired × TypicalProcFeePercent` so that proc fee estimates are always current | [task-04-flow-calculate-proc-fee.md](task-04-flow-calculate-proc-fee.md) | 🔴 Critical |
 | P5-05 | As a **system**, when a case status changes to "Completed" I need to send a completion email, close outstanding document requests, and remind the case owner to review commissions | [task-05-flow-case-completion.md](task-05-flow-case-completion.md) | 🔴 Critical |
 
 ---

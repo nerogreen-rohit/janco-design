@@ -57,12 +57,15 @@ Add each column in order. Use **+ Add column** or **List Settings → Create col
 
 This list is **read-only for staff**. Only Flow 6 creates items.
 
-1. Go to **List Settings** → **Advanced settings**
-2. Set **Read access** = `Read all items`
-3. Set **Create and Edit access** = `None` (staff cannot create/edit directly)
-4. Flow 6 runs under an elevated service account or app registration with write access
+1. Go to **List Settings** → **Permissions for this list**
+2. Click **Stop Inheriting Permissions** (this breaks inheritance from the site)
+3. Select the **Members** group (e.g. "Lending Site Members") → click **Edit User Permissions**
+4. Change permission level from **Edit** (or Contribute) to **Read** only
+5. Keep the **Owners** group and the **flow service account / app registration** at Edit or Full Control so Flow 6 can write to this list
 
-> **Note:** If using a service account is not feasible, rely on the Staff App not exposing any edit form for this list. The Power Apps Timeline tab shows data in read-only mode only.
+> **Why break inheritance?** SharePoint list Advanced Settings does not provide a "Create and Edit access = None" option. Breaking permission inheritance and removing Contribute/Edit from the Members group is the correct way to prevent staff from directly creating or editing Stage History items.
+
+> **Fallback:** If breaking inheritance is not feasible (e.g. governance constraints), ensure the Staff App Timeline tab uses `DisplayMode.View` on all controls and does not expose any edit or new-item form for this list. This is a UI-level safeguard, not a list-level permission control.
 
 ### Step 6 — Verify
 

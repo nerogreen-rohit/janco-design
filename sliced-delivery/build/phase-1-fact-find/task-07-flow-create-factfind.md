@@ -41,38 +41,18 @@ Flow 3 generates the CaseID asynchronously. Flow 4 must wait for it.
 
 ### Step 4 — Generate Guest Share Link
 
-1. Add **Send an HTTP request to SharePoint**:
+1. Add **Create sharing link for a file or folder** (SharePoint):
    - Site Address: `https://[tenant].sharepoint.com/sites/lending`
-   - Method: POST
-   - Uri: `_api/web/lists/getbytitle('Fact-Find Responses')/items(@{outputs('Create_item')?['body/ID']})/ShareLink`
-   - Headers:
-     ```json
-     {
-       "Accept": "application/json;odata=nometadata",
-       "Content-Type": "application/json"
-     }
-     ```
-   - Body:
-     ```json
-     {
-       "request": {
-         "createLink": true,
-         "settings": {
-           "linkKind": 5,
-           "allowAnonymousAccess": false,
-           "expiration": "",
-           "restrictShareMembership": false,
-           "updatePassword": false,
-           "password": ""
-         }
-       }
-     }
-     ```
+   - Library Name / List Name: `Fact-Find Responses`
+   - Item Id: `@{outputs('Create_item')?['body/ID']}`
+   - Link type / Permission: `Edit` (or the least privilege required)
+   - Link scope: `Specific people`
+   - People: the customer email field from the Case item (e.g. `triggerOutputs()?['body/Applicant1Email']`)
 
-   > **Alternative (simpler):** Use the **Create sharing link for a file or folder** action if available in your connector version. Set permission to "Edit" and scope to "Anyone with the link" or "Specific people" (the customer's email).
+   > Use **Specific people** for external customers so the recipient can access the item via their email address without requiring an internal tenant account. Only use **Anyone with the link** if your tenant sharing policy explicitly allows anonymous links.
 
-2. Add **Compose** — parse the response to extract the share link URL:
-   - `body('Send_an_HTTP_request_to_SharePoint')?['d']?['ShareLink']?['sharingLinkInfo']?['Url']`
+2. Add **Compose** — extract the share link URL from the sharing action output:
+   - Use the dynamic content for the generated sharing link URL from **Create sharing link for a file or folder**
 
 ### Step 5 — Update Case Record with Fact-Find Link
 

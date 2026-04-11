@@ -36,10 +36,10 @@
 ║                                                                         ║
 ║  ── CASE FOLDERS ─────────────────────────────────────────────────────  ║
 ║                                                                         ║
-║  📁 01-identification  (3 files)                                        ║
-║  📁 02-property        (0 files)                                        ║
-║  📁 03-legal-and-lender (1 file)                                        ║
-║  📁 04-other           (0 files)                                        ║
+║  📁 01-Identity         (3 files)                                        ║
+║  📁 02-Income           (0 files)                                        ║
+║  📁 03-Property         (1 file)                                         ║
+║  📁 04-Bank-Statements  (0 files)                                        ║
 ║  📁 05-fact-find       (1 file)     [staff only]                        ║
 ║  ...                                                                    ║
 ╚══════════════════════════════════════════════════════════════════════════╝
@@ -164,7 +164,7 @@ UpdateContext({showRequestForm: false})
 ║  Select files to attach:                      ║
 ║  ☑ passport-scan.pdf          (01-ident)      ║
 ║  ☑ payslips-march.pdf         (01-ident)      ║
-║  ☐ tenancy-agreement.pdf      (02-property)   ║
+║  ☐ tenancy-agreement.pdf      (03-Property)   ║
 ║  ☑ valuation-report.pdf       (03-legal)      ║
 ║                                               ║
 ║  Cover Note: [____________________________]   ║
@@ -213,11 +213,14 @@ Display the document library folders for this case:
 
 ```
 // OnSelect for folder item
+// Use the actual library name "Case Documents" (with space) and folder names from Phase 1 Flow 5
 Launch(
-    "https://[tenant].sharepoint.com/sites/lending/CaseDocuments/" &
+    "https://[tenant].sharepoint.com/sites/lending/Case Documents/" &
     varCurrentCase.CaseID & "/" & ThisItem.FolderName
 )
 ```
+
+> **Note:** The library is named `Case Documents` (with space), not `CaseDocuments`. SharePoint encodes the space as `%20` in browser URLs but handles it transparently via the `Launch()` function. Folder names must match Phase 1 Flow 5 output exactly: `01-Identity`, `02-Income`, `03-Property`, `04-Bank-Statements`, etc. Alternatively, store the `CaseFolderPath` on the Case record (set by Flow 5) and use that as the base URL.
 
 ### Step 8 — Test
 

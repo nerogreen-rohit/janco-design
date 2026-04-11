@@ -18,17 +18,20 @@
 4. Site Address: `https://[tenant].sharepoint.com/sites/lending`
 5. List Name: `Specialist Lending Cases`
 
-### Step 2 — Configure Trigger Condition
+### Step 2 — Detect Actual Stage Change
 
-Add a trigger condition so the flow only runs when the stage actually changes:
+SharePoint "When an item is created or modified" triggers do not expose a `{Previous...}` field. Use the **Get changes** action or a compare-and-terminate pattern to detect whether `CurrentStageID` actually changed:
 
-**Settings → Trigger Conditions:**
+1. Add **Get changes for an item or a file (properties only)** (SharePoint):
+   - Site Address: `https://[tenant].sharepoint.com/sites/lending`
+   - List Name: `Specialist Lending Cases`
+   - Id: `triggerOutputs()?['body/ID']`
+   - Since: `triggerOutputs()?['body/{VersionNumber}']`
 
-```
-@not(equals(triggerOutputs()?['body/CurrentStageID'], triggerOutputs()?['body/{PreviousCurrentStageID}']))
-```
+2. Add **Condition** — check if `CurrentStageID` is in the list of changed columns:
+   - If `CurrentStageID` has **not** changed → add **Terminate** (Status: Cancelled, Message: "Stage did not change — skipping")
 
-> **Alternative approach:** If trigger conditions on lookup changes are unreliable, use a Compose action to compare old vs. new CurrentStageNumber and terminate early if unchanged.
+> **Alternative (simpler):** Store the last-known `CurrentStageNumber` in a helper column (e.g. `PreviousStageNumber_Shadow`) and compare it to the current `CurrentStageNumber`. If equal, terminate early. Update the shadow column at the end of the flow.
 
 ### Step 3 — Initialize Variables
 
@@ -100,7 +103,7 @@ If **Yes**: Set `varIsSkipped` to `true`
    - StageName: `@{outputs('NewStageName')}` ← **Text snapshot, NOT a lookup**
    - PreviousStageNumber: `@{variables('varPrevStageNumber')}`
    - PreviousStageName: `@{variables('varPrevStageName')}` ← **Text snapshot**
-   - ChangedBy: `triggerOutputs()?['body/Editor/Claims/emailaddress']`
+   - ChangedBy: `triggerOutputs()?['body/Editor']` ← **Use the Editor field directly** (the SharePoint connector returns Person fields in the format required by "Create item". If the Person field expects a claims value, use `triggerOutputs()?['body/Editor/Claims']` — test to confirm `ChangedBy.DisplayName` resolves correctly in the Staff App Timeline.)
    - ChangedDate: `utcNow()`
    - TimeInPreviousStageHours: `@{outputs('TimeInPreviousStageHours')}`
    - Notes: `triggerOutputs()?['body/StageNotes']`

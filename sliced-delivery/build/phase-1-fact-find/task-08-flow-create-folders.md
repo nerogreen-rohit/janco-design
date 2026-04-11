@@ -84,25 +84,16 @@ After the Apply to each completes, create share links for the first 4 folders on
 
 1. Add **Apply to each** on `createArray('01-Identity', '02-Income', '03-Property', '04-Bank-Statements')`
 2. Inside the loop:
-   - **Send an HTTP request to SharePoint**:
-     - Method: POST
-     - Uri: `_api/web/GetFolderByServerRelativeUrl('/sites/lending/Case Documents/@{variables('varCaseID')}/@{items('Apply_to_each_2')}')/ShareLink`
-     - Body:
-     ```json
-     {
-       "request": {
-         "createLink": true,
-         "settings": {
-           "linkKind": 5,
-           "role": 2,
-           "allowAnonymousAccess": false
-         }
-       }
-     }
-     ```
-   - **Compose** — extract the share URL from the response
+   - **Create sharing link for a file or folder** (SharePoint):
+     - Site Address: `https://[tenant].sharepoint.com/sites/lending`
+     - Library Name: `Case Documents`
+     - Item Path: `@{variables('varCaseID')}/@{items('Apply_to_each_2')}`
+     - Link type / Permission: `Edit` (allows upload/contribute)
+     - Link scope: `Specific people`
+     - People: `triggerOutputs()?['body/Applicant1Email']` (the customer's email)
+   - **Compose** — extract the share URL from the action output
 
-   > `linkKind: 5` = Organization link, `role: 2` = Edit/Contribute. Adjust `linkKind` for guest access (use `2` for anonymous or specific people sharing).
+   > Use a guest-compatible **Specific people** share link sent to the customer email address, with edit/upload access. Do **not** use an organization-only link (`linkKind: 5`) for external customers. Ensure the lending site and tenant external sharing settings from Phase 1 allow sharing with guests/specific people.
 
 ### Step 7 — Update Case Record with Folder Links
 
