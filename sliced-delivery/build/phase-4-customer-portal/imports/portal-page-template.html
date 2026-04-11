@@ -1,0 +1,174 @@
+<!--
+  Customer Portal Page Template
+  Phase 4 — Customer Portal
+  
+  Usage: Replace all {{placeholder}} variables with actual values, then paste
+  into a SharePoint Embed web part on the customer's portal page.
+  
+  Placeholders:
+    {{CaseID}}            - e.g. BTL-2026-0001
+    {{ApplicantName}}     - e.g. John & Jane Doe
+    {{FactFindGuestLink}} - Guest share link for Fact-Find item (Phase 1 Flow 4)
+    {{Folder01Link}}      - Guest share link for 01-Identity folder (Phase 1 Flow 5)
+    {{Folder02Link}}      - Guest share link for 02-Income folder
+    {{Folder03Link}}      - Guest share link for 03-Property folder
+    {{Folder04Link}}      - Guest share link for 04-Bank-Statements folder
+    {{AdvisorName}}       - Case owner display name
+    {{AdvisorEmail}}      - Case owner email address
+-->
+<div id="customer-portal" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 720px; margin: 0 auto; color: #333;">
+
+  <!-- Header -->
+  <div style="background: linear-gradient(135deg, #0078d4, #005a9e); color: #fff; padding: 32px 28px; border-radius: 8px 8px 0 0; text-align: center;">
+    <div style="font-size: 28px; margin-bottom: 4px;">🏦</div>
+    <h1 style="margin: 0; font-size: 22px; font-weight: 700; letter-spacing: 0.5px;">YOUR LENDING APPLICATION</h1>
+    <p style="margin: 6px 0 0; font-size: 14px; opacity: 0.85;">Specialist Lending Hub — Customer Portal</p>
+  </div>
+
+  <!-- Welcome -->
+  <div style="background: #f0f6ff; padding: 20px 28px; border-bottom: 1px solid #d0dff0;">
+    <p style="margin: 0; font-size: 16px;">Welcome, <strong>{{ApplicantName}}</strong></p>
+    <p style="margin: 4px 0 0; font-size: 14px; color: #555;">Case Reference: <strong>{{CaseID}}</strong></p>
+  </div>
+
+  <!-- Application Progress -->
+  <div style="padding: 24px 28px; border-bottom: 1px solid #e8e8e8;">
+    <h2 style="margin: 0 0 16px; font-size: 16px; font-weight: 700; text-transform: uppercase; color: #0078d4; letter-spacing: 0.5px;">Application Progress</h2>
+    <div id="progress-tracker">
+      <!--
+        Stage list: Replace the class "completed", "current", or "future" on each
+        stage <div> to reflect the customer's current progress.
+        
+        Rules:
+          - StageNumber < CurrentStageNumber  → class="completed"
+          - StageNumber = CurrentStageNumber  → class="current"
+          - StageNumber > CurrentStageNumber  → class="future"
+          - Stage 4 (Product Research) is NEVER shown to customers.
+      -->
+      <div class="stage completed" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center;">✅</span>
+        <span style="font-size: 14px; color: #107c10;">Application Received</span>
+      </div>
+      <div class="stage completed" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center;">✅</span>
+        <span style="font-size: 14px; color: #107c10;">Information Gathering</span>
+      </div>
+      <div class="stage completed" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center;">✅</span>
+        <span style="font-size: 14px; color: #107c10;">Terms Agreed</span>
+      </div>
+      <!-- Stage 4 (Product Research) is intentionally omitted — internal only -->
+      <div class="stage completed" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center;">✅</span>
+        <span style="font-size: 14px; color: #107c10;">Options Presented</span>
+      </div>
+      <div class="stage completed" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center;">✅</span>
+        <span style="font-size: 14px; color: #107c10;">Illustrations Prepared</span>
+      </div>
+      <div class="stage completed" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center;">✅</span>
+        <span style="font-size: 14px; color: #107c10;">Initial Decision</span>
+      </div>
+      <div class="stage current" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center;">▶️</span>
+        <span style="font-size: 14px; font-weight: 700; color: #0078d4;">Application Submitted</span>
+        <span style="margin-left: 8px; font-size: 11px; color: #0078d4; font-weight: 600; font-style: italic;">← YOU ARE HERE</span>
+      </div>
+      <div class="stage future" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center; color: #999;">○</span>
+        <span style="font-size: 14px; color: #888;">Valuation Arranged</span>
+      </div>
+      <div class="stage future" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center; color: #999;">○</span>
+        <span style="font-size: 14px; color: #888;">Lender Review</span>
+      </div>
+      <div class="stage future" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center; color: #999;">○</span>
+        <span style="font-size: 14px; color: #888;">Offer Issued</span>
+      </div>
+      <div class="stage future" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center; color: #999;">○</span>
+        <span style="font-size: 14px; color: #888;">Legal Work</span>
+      </div>
+      <div class="stage future" style="display: flex; align-items: center; padding: 6px 0;">
+        <span style="font-size: 18px; min-width: 28px; text-align: center; color: #999;">○</span>
+        <span style="font-size: 14px; color: #888;">Funds Released</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- What You Need To Do -->
+  <div style="padding: 24px 28px; border-bottom: 1px solid #e8e8e8;">
+    <h2 style="margin: 0 0 16px; font-size: 16px; font-weight: 700; text-transform: uppercase; color: #0078d4; letter-spacing: 0.5px;">What You Need To Do</h2>
+    <!--
+      Action items are populated from the Document Requests list.
+      Show items where Status = "Requested" or "Rejected" for this CaseID.
+      Remove the sample items below and replace with a SharePoint List web part
+      or dynamically generated content.
+    -->
+    <div id="action-items">
+      <div style="display: flex; align-items: flex-start; padding: 8px 0; border-left: 4px solid #ff8c00; background: #fff4ce; padding: 10px 12px; margin-bottom: 6px; border-radius: 4px;">
+        <span style="font-size: 16px; margin-right: 8px;">⚠️</span>
+        <div>
+          <div style="font-weight: 600; font-size: 14px;">Please upload your bank statements (last 6 months)</div>
+          <div style="font-size: 12px; color: #666; margin-top: 2px;">Due by: 28 February 2026</div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: flex-start; border-left: 4px solid #d13438; background: #fde7e9; padding: 10px 12px; margin-bottom: 6px; border-radius: 4px;">
+        <span style="font-size: 16px; margin-right: 8px;">❌</span>
+        <div>
+          <div style="font-weight: 600; font-size: 14px;">Your EPC certificate was rejected — please re-upload</div>
+          <div style="font-size: 12px; color: #666; margin-top: 2px;">Please upload a clearer copy</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 12px;">
+      <a href="{{Folder04Link}}" target="_blank" rel="noopener noreferrer" style="display: inline-block; background: #0078d4; color: #fff; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600;">📤 Upload Documents</a>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div style="padding: 24px 28px; border-bottom: 1px solid #e8e8e8;">
+    <h2 style="margin: 0 0 16px; font-size: 16px; font-weight: 700; text-transform: uppercase; color: #0078d4; letter-spacing: 0.5px;">Messages</h2>
+    <!--
+      Messages section: Replace with a SharePoint List web part showing the
+      Messages list filtered to this CaseID with Direction ≠ Internal.
+      The sample below is a static placeholder.
+    -->
+    <div style="display: flex; align-items: center; padding: 10px 12px; background: #f0f6ff; border-left: 4px solid #0078d4; border-radius: 4px;">
+      <span style="font-size: 18px; margin-right: 10px;">✉️</span>
+      <span style="font-size: 14px;">You have <strong>1</strong> unread message from your advisor</span>
+    </div>
+    <div style="margin-top: 12px;">
+      <a href="#messages-view" style="display: inline-block; background: #0078d4; color: #fff; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600;">📨 View Messages</a>
+    </div>
+  </div>
+
+  <!-- Links -->
+  <div style="padding: 24px 28px; border-bottom: 1px solid #e8e8e8;">
+    <h2 style="margin: 0 0 16px; font-size: 16px; font-weight: 700; text-transform: uppercase; color: #0078d4; letter-spacing: 0.5px;">Links</h2>
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <a href="{{FactFindGuestLink}}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; padding: 12px 20px; background: #f3f2f1; border: 1px solid #d2d0ce; border-radius: 4px; text-decoration: none; color: #333; font-size: 14px; font-weight: 600; transition: background 0.2s;">
+        <span style="font-size: 18px; margin-right: 10px;">📋</span>
+        Update Your Information (Fact-Find)
+      </a>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 12px 20px; background: #f3f2f1; border: 1px solid #d2d0ce; border-radius: 4px;">
+        <span style="font-size: 14px; font-weight: 600; margin-bottom: 4px;">📁 Your Document Folders</span>
+        <a href="{{Folder01Link}}" target="_blank" rel="noopener noreferrer" style="font-size: 13px; color: #0078d4; text-decoration: none; padding: 4px 0;">📂 Identity Documents (passport, driving licence)</a>
+        <a href="{{Folder02Link}}" target="_blank" rel="noopener noreferrer" style="font-size: 13px; color: #0078d4; text-decoration: none; padding: 4px 0;">📂 Income Documents (payslips, tax returns, SA302)</a>
+        <a href="{{Folder03Link}}" target="_blank" rel="noopener noreferrer" style="font-size: 13px; color: #0078d4; text-decoration: none; padding: 4px 0;">📂 Property Documents (EPC, lease, planning)</a>
+        <a href="{{Folder04Link}}" target="_blank" rel="noopener noreferrer" style="font-size: 13px; color: #0078d4; text-decoration: none; padding: 4px 0;">📂 Bank Statements (last 6 months)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advisor Contact -->
+  <div style="padding: 20px 28px; background: #f8f8f8; border-radius: 0 0 8px 8px; text-align: center;">
+    <p style="margin: 0; font-size: 14px; color: #555;">
+      Questions? Contact your advisor: <strong>{{AdvisorName}}</strong> —
+      <a href="mailto:{{AdvisorEmail}}" style="color: #0078d4; text-decoration: none;">{{AdvisorEmail}}</a>
+    </p>
+  </div>
+
+</div>

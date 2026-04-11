@@ -1,0 +1,125 @@
+ColumnName,Type,Section,ChoiceValues,Notes
+Title,Single line of text,Identity,,Set to CaseID by flow
+CaseID,Single line of text,Identity,,FK to Cases list
+CaseRef,Single line of text,Identity,,Human-readable case reference
+A1Title,Choice,Applicant 1 Personal,"Mr|Mrs|Miss|Ms|Dr|Other",
+A1FirstName,Single line of text,Applicant 1 Personal,,
+A1LastName,Single line of text,Applicant 1 Personal,,
+A1DateOfBirth,Date,Applicant 1 Personal,,Date only
+A1Nationality,Single line of text,Applicant 1 Personal,,
+A1NiNumber,Single line of text,Applicant 1 Personal,,National Insurance number
+A1MaritalStatus,Choice,Applicant 1 Personal,"Single|Married|Civil Partner|Separated|Divorced|Widowed",
+A1ResidentialStatus,Choice,Applicant 1 Personal,"Owner Occupier|Renting|Living with Family|Other",
+A1CurrentAddressLine1,Single line of text,Applicant 1 Personal,,
+A1CurrentAddressLine2,Single line of text,Applicant 1 Personal,,
+A1CurrentAddressTown,Single line of text,Applicant 1 Personal,,
+A1CurrentAddressPostcode,Single line of text,Applicant 1 Personal,,
+A1TimeAtAddressYears,Number,Applicant 1 Personal,,0 decimal places
+A1TimeAtAddressMonths,Number,Applicant 1 Personal,,0 decimal places
+A1PreviousAddressLine1,Single line of text,Applicant 1 Personal,,If < 3 years at current address
+A1PreviousAddressPostcode,Single line of text,Applicant 1 Personal,,
+A1MobilePhone,Single line of text,Applicant 1 Personal,,
+A1Email,Single line of text,Applicant 1 Personal,,
+A2Title,Choice,Applicant 2 Personal,"Mr|Mrs|Miss|Ms|Dr|Other",
+A2FirstName,Single line of text,Applicant 2 Personal,,
+A2LastName,Single line of text,Applicant 2 Personal,,
+A2DateOfBirth,Date,Applicant 2 Personal,,Date only
+A2Nationality,Single line of text,Applicant 2 Personal,,
+A2NiNumber,Single line of text,Applicant 2 Personal,,
+A2MaritalStatus,Choice,Applicant 2 Personal,"Single|Married|Civil Partner|Separated|Divorced|Widowed",
+A2ResidentialStatus,Choice,Applicant 2 Personal,"Owner Occupier|Renting|Living with Family|Other",
+A2CurrentAddressLine1,Single line of text,Applicant 2 Personal,,
+A2CurrentAddressPostcode,Single line of text,Applicant 2 Personal,,
+A2MobilePhone,Single line of text,Applicant 2 Personal,,
+A2Email,Single line of text,Applicant 2 Personal,,
+A1EmploymentStatus,Choice,Income & Employment A1,"Employed|Self-Employed|Director|Retired|Not Employed|Other",
+A1EmployerName,Single line of text,Income & Employment A1,,
+A1JobTitle,Single line of text,Income & Employment A1,,
+A1TimeEmployedYears,Number,Income & Employment A1,,0 decimal places
+A1GrossAnnualSalary,Currency,Income & Employment A1,,
+A1OtherIncome,Currency,Income & Employment A1,,
+A1OtherIncomeSource,Single line of text,Income & Employment A1,,
+A1SelfEmpTradingAs,Single line of text,Income & Employment A1,,If self-employed
+A1SelfEmpYearsTrading,Number,Income & Employment A1,,0 decimal places
+A1SelfEmpNetProfit1,Currency,Income & Employment A1,,Year 1 (most recent)
+A1SelfEmpNetProfit2,Currency,Income & Employment A1,,Year 2
+A1SelfEmpNetProfit3,Currency,Income & Employment A1,,Year 3
+A2EmploymentStatus,Choice,Income & Employment A2,"Employed|Self-Employed|Director|Retired|Not Employed|Other",
+A2EmployerName,Single line of text,Income & Employment A2,,
+A2JobTitle,Single line of text,Income & Employment A2,,
+A2TimeEmployedYears,Number,Income & Employment A2,,0 decimal places
+A2GrossAnnualSalary,Currency,Income & Employment A2,,
+A2OtherIncome,Currency,Income & Employment A2,,
+A2OtherIncomeSource,Single line of text,Income & Employment A2,,
+A2SelfEmpTradingAs,Single line of text,Income & Employment A2,,
+A2SelfEmpYearsTrading,Number,Income & Employment A2,,0 decimal places
+A2SelfEmpNetProfit1,Currency,Income & Employment A2,,
+A2SelfEmpNetProfit2,Currency,Income & Employment A2,,
+A2SelfEmpNetProfit3,Currency,Income & Employment A2,,
+PropertyAddress,Multiple lines of text,Property,,Plain text
+Postcode,Single line of text,Property,,
+PropertyType,Choice,Property,"Residential|HMO|MUB|Commercial|Semi-Commercial|Land|Other",
+Tenure,Choice,Property,"Freehold|Leasehold|Commonhold",
+LeaseYearsRemaining,Number,Property,,0 decimal places
+YearBuilt,Number,Property,,0 decimal places
+Bedrooms,Number,Property,,0 decimal places
+Bathrooms,Number,Property,,0 decimal places
+IsListed,Yes/No,Property,,Default: No
+IsNonStandard,Yes/No,Property,,Default: No
+CurrentUse,Single line of text,Property,,
+IntendedUse,Single line of text,Property,,
+PurchaseOrRefinance,Choice,Property,"Purchase|Refinance",
+EstimatedValue,Currency,Property,,
+PurchasePrice,Currency,Property,,
+OutstandingMortgageBalance,Currency,Property,,
+ExistingLender,Single line of text,Property,,
+MonthlyRentalIncome,Currency,Property,,
+IsHMO,Yes/No,Property,,Default: No
+NumberOfUnits,Number,Property,,0 decimal places
+EpcRating,Choice,Property,"A|B|C|D|E|F|G",
+IsPortfolioLandlord,Yes/No,Portfolio,,Default: No
+TotalPortfolioProperties,Number,Portfolio,,0 decimal places
+TotalPortfolioValue,Currency,Portfolio,,
+TotalPortfolioMortgageBalance,Currency,Portfolio,,
+TotalPortfolioRentalIncome,Currency,Portfolio,,
+PortfolioDetails,Multiple lines of text,Portfolio,,Plain text
+IsCompanyApplication,Yes/No,Company / SPV,,Default: No
+CompanyName,Single line of text,Company / SPV,,
+CompanyNumber,Single line of text,Company / SPV,,
+CompanyType,Choice,Company / SPV,"SPV|Trading Company|LLP|Partnership|Other",
+IncorporationDate,Date,Company / SPV,,Date only
+CompanyAddress,Multiple lines of text,Company / SPV,,Plain text
+NatureOfBusiness,Single line of text,Company / SPV,,
+Turnover,Currency,Company / SPV,,
+NetProfit,Currency,Company / SPV,,
+DirectorsNames,Multiple lines of text,Company / SPV,,Plain text
+LoanAmountRequired,Currency,Loan Requirements,,
+LoanPurpose,Single line of text,Loan Requirements,,
+RepaymentType,Choice,Loan Requirements,"Interest Only|Capital & Interest",
+PreferredTermMonths,Number,Loan Requirements,,0 decimal places
+MaxMonthlyPayment,Currency,Loan Requirements,,
+HasExistingFinance,Yes/No,Loan Requirements,,Default: No
+ExistingFinanceDetails,Multiple lines of text,Loan Requirements,,Plain text
+AdverseCredit,Yes/No,Loan Requirements,,Default: No
+AdverseCreditDetails,Multiple lines of text,Loan Requirements,,Plain text
+ExitStrategy,Choice,Bridging / Development,"Refinance|Sale|Other",
+ExitStrategyDetails,Multiple lines of text,Bridging / Development,,Plain text
+AuctionDate,Date,Bridging / Development,,Date only
+CompletionDeadlineDate,Date,Bridging / Development,,Date only
+WorksRequired,Yes/No,Bridging / Development,,Default: No
+WorksDescription,Multiple lines of text,Bridging / Development,,Plain text
+WorksBudget,Currency,Bridging / Development,,
+BuildCost,Currency,Bridging / Development,,
+EstimatedGDV,Currency,Bridging / Development,,
+ProfitOnCosts,Number,Bridging / Development,,Percentage - 2 decimal places
+DrawdownSchedule,Multiple lines of text,Bridging / Development,,Plain text
+PlanningPermissionStatus,Choice,Bridging / Development,"Not Required|Permitted Development|Applied|Granted|Refused",
+Solicitor,Single line of text,Additional Info,,
+SolicitorPhone,Single line of text,Additional Info,,
+SolicitorEmail,Single line of text,Additional Info,,
+PowerOfAttorney,Yes/No,Additional Info,,Default: No
+SpecialCircumstances,Multiple lines of text,Additional Info,,Plain text
+CustomerDeclarationAgreed,Yes/No,Additional Info,,Default: No
+CustomerDeclarationDate,Date,Additional Info,,Date only
+LastUpdatedByCustomer,Date and Time,Additional Info,,Date and time - updated by Flow 15
+Status,Choice,Additional Info,"Not Started|In Progress|Submitted|Reviewed",Default: Not Started

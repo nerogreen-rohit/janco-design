@@ -1,0 +1,13 @@
+ColumnName,Type,Required,Notes
+Title,Single line of text,No,Auto-set to {CaseID}-{timestamp} by flow
+CaseID,Single line of text,Yes,FK to Cases list
+CaseName,Single line of text,No,Denormalized
+MessageBody,Multiple lines of text,Yes,Message content
+SentBy,Person or Group,Yes,Sender (staff member)
+SentByName,Single line of text,No,Denormalized display name
+Direction,Choice,Yes,"Advisor → Customer|Customer → Advisor|Internal"
+IsRead,Yes/No,No,Customer has read (Default: No)
+IsReadByStaff,Yes/No,No,Staff has read (Default: No)
+SentDate,Date and Time,Yes,Timestamp of message
+AttachmentURL,Hyperlink,No,Optional document link
+IsSystemMessage,Yes/No,No,Auto-generated status notification (Default: No)

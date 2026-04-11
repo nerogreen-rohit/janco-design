@@ -1,0 +1,17 @@
+ColumnName,Type,Required,Notes
+Title,Single line of text,No,Auto-set to {CaseID}-{DocType} by flow
+CaseID,Single line of text,Yes,FK to Cases list
+CaseName,Single line of text,No,Denormalized
+DocTypeID,Lookup,Yes,"Lookup list: Document Types, column: Title"
+DocTypeName,Single line of text,No,Denormalized from Document Types
+DocTypeCategory,Single line of text,No,Denormalized from Document Types
+ApplicantNumber,Choice,No,"Applicant 1|Applicant 2|Both|N/A"
+RequestedBy,Person or Group,Yes,Staff member who requested the document
+RequestedDate,Date and Time,Yes,Date only
+DueDate,Date and Time,No,Date only
+Status,Choice,Yes,"Requested|Received|Approved|Rejected|Not Required (Default: Requested)"
+CustomerNotes,Multiple lines of text,No,Notes from customer on upload
+StaffNotes,Multiple lines of text,No,Internal review notes
+SharePointFileURL,Hyperlink,No,Link to uploaded file in document library
+RejectionReason,Multiple lines of text,No,Required when Status = Rejected
+RetryCount,Number,No,Times re-requested (Default: 0)

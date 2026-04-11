@@ -1,0 +1,13 @@
+ColumnName,Type,Required,Notes
+Title,Single line of text,No,Auto-set to {CaseID}-Stage{N} by Flow 6
+CaseID,Single line of text,Yes,FK to Cases list
+CaseName,Single line of text,No,Denormalized case display name
+StageNumber,Number,Yes,Snapshot at time of transition
+StageName,Single line of text,Yes,Text snapshot — NOT a lookup (audit integrity)
+PreviousStageNumber,Number,No,Stage number before this transition
+PreviousStageName,Single line of text,No,Text snapshot of previous stage name
+ChangedBy,Person or Group,Yes,User who triggered the stage change
+ChangedDate,Date and Time,Yes,Timestamp of the transition
+TimeInPreviousStageHours,Number,No,Duration in previous stage (calculated by Flow 6)
+Notes,Multiple lines of text,No,Notes recorded at time of transition
+IsSkipped,Yes/No,No,True if stage was skipped (Default: No)

@@ -1,0 +1,15 @@
+ColumnName,Type,Required,Notes
+Title,Single line of text,Yes,Lender name
+LenderType,Choice,Yes,"High Street|Specialist|Challenger|Private|Bridging|Development"
+ProductsOffered,Choice (multi),No,"BTL|Bridging|Commercial|Dev Finance|Refurb|Auction"
+ContactName,Single line of text,No,BDM name
+ContactEmail,Single line of text,No,BDM email
+ContactPhone,Single line of text,No,BDM phone
+SubmissionEmail,Single line of text,No,Used by Flow 12 (Email Docs to Lender)
+MaxLTV,Number,No,Maximum loan-to-value percentage
+MinLoanAmount,Currency,No,Minimum loan amount offered
+MaxLoanAmount,Currency,No,Maximum loan amount offered
+TypicalProcFeePercent,Number,No,Typical procuration fee percentage
+Notes,Multiple lines of text,No,General notes about the lender
+IsActive,Yes/No,Yes,Whether lender is currently active (Default: Yes)
+WebsiteURL,Hyperlink,No,Lender website

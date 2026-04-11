@@ -1,0 +1,26 @@
+Title,Category,ApplicableTo,Description,IsRequired,SortOrder,IsActive
+Passport,Identity,All Products,Valid passport for identity verification,Yes,1,Yes
+Driving Licence,Identity,All Products,Full or provisional driving licence,Yes,2,Yes
+Utility Bill (3 months),Identity,All Products,Utility bill dated within last 3 months for proof of address,Yes,3,Yes
+Council Tax Bill,Identity,All Products,Current council tax bill for proof of address,No,4,Yes
+Last 3 Months Payslips,Income,All Products,Most recent 3 consecutive monthly payslips,Yes,5,Yes
+Last 2 Years SA302 + Tax Overview,Income,All Products,HMRC SA302 and tax year overview for last 2 years,Yes,6,Yes
+Last 2 Years Company Accounts,Income,"Commercial,Dev Finance",Certified company accounts for the last 2 financial years,Yes,7,Yes
+6 Months Business Bank Statements,Income,"Commercial,Dev Finance",Last 6 months of business current account statements,Yes,8,Yes
+6 Months Personal Bank Statements,Income,All Products,Last 6 months of personal current account statements,Yes,9,Yes
+Mortgage Statement,Property,"BTL,Refurb",Most recent annual mortgage statement for existing properties,Yes,10,Yes
+Buildings Insurance,Property,All Products,Current buildings insurance schedule or certificate,Yes,11,Yes
+Tenancy Agreement,Property,"BTL,Refurb",Current AST or tenancy agreement for rental properties,Yes,12,Yes
+EPC Certificate,Property,"BTL,Refurb",Valid Energy Performance Certificate,Yes,13,Yes
+Title Register (OS1),Property,All Products,Official copies of the Land Registry title register,No,14,Yes
+Memorandum & Articles,Legal,"Commercial,Dev Finance",Company memorandum and articles of association,Yes,15,Yes
+Certificate of Incorporation,Legal,"Commercial,Dev Finance",Companies House certificate of incorporation,Yes,16,Yes
+Schedule of Works,Legal,"Dev Finance,Refurb",Detailed schedule of proposed refurbishment or development works,Yes,17,Yes
+ESIS/KFI,Lender,All Products,European Standardised Information Sheet or Key Facts Illustration,No,18,Yes
+DIP Confirmation,Lender,All Products,Decision in Principle confirmation from lender,No,19,Yes
+Formal Loan Offer,Lender,All Products,Formal mortgage or loan offer from lender,Yes,20,Yes
+Valuation Report,Lender,All Products,RICS valuation report commissioned by the lender,No,21,Yes
+Power of Attorney,Other,All Products,Registered power of attorney document if applicable,No,22,Yes
+Proof of Deposit,Other,"BTL,Bridging,Commercial",Evidence of deposit source and availability,Yes,23,Yes
+Auction Legal Pack,Other,Auction,Full auction legal pack including searches and special conditions,Yes,24,Yes
+Exit Strategy Evidence,Other,"Bridging,Dev Finance",Supporting evidence for the proposed exit strategy,Yes,25,Yes
